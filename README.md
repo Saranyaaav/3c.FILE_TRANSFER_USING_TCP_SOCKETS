@@ -10,6 +10,27 @@ To write a python program for creating File Transfer using TCP Sockets Links
 ## PROGRAM
 ### CLIENT:
 ```
+import socket 
+s = socket.socket() 
+host = socket.gethostname() 
+port = 60000 
+s.connect((host, port)) 
+s.send("Hello server!".encode()) 
+with open('received_file', 'wb') as f: 
+    while True: 
+        print('receiving data...') 
+        data = s.recv(1024) 
+        print('data=%s', (data)) 
+        if not data: 
+            break 
+        f.write(data) 
+f.close() 
+print('Successfully get the file') 
+s.close() 
+print('connection closed')
+```
+### SERVER:
+```
 import socket                    
 port = 60000                    
 s = socket.socket()              
@@ -32,32 +53,11 @@ while True:
     conn.send('Thank you for connecting'.encode()) 
     conn.close()
 ```
-### SERVER:
-```
-import socket 
-s = socket.socket() 
-host = socket.gethostname() 
-port = 60000 
-s.connect((host, port)) 
-s.send("Hello server!".encode()) 
-with open('received_file', 'wb') as f: 
-    while True: 
-        print('receiving data...') 
-        data = s.recv(1024) 
-        print('data=%s', (data)) 
-        if not data: 
-            break 
-        f.write(data) 
-f.close() 
-print('Successfully get the file') 
-s.close() 
-print('connection closed')
-```
 ## OUPUT
 ### CLIENT:
-![Screenshot 2024-04-18 205625](https://github.com/Saranyaaav/3c.FILE_TRANSFER_USING_TCP_SOCKETS/assets/144870813/2edebef6-3921-4de1-95bf-1794897ed911)
-### SERVER:
 ![Screenshot 2024-04-18 205649](https://github.com/Saranyaaav/3c.FILE_TRANSFER_USING_TCP_SOCKETS/assets/144870813/35955bc8-e2c1-4958-b14b-870ccd303855)
+### SERVER:
+![Screenshot 2024-04-18 205625](https://github.com/Saranyaaav/3c.FILE_TRANSFER_USING_TCP_SOCKETS/assets/144870813/2edebef6-3921-4de1-95bf-1794897ed911)
 ## RESULT
 Thus, the python program for creating File Transfer using TCP Sockets Links was 
 successfully created and executed.
